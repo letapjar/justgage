@@ -272,6 +272,33 @@ JustGage = function(config) {
   if (obj.config.value < obj.config.min) obj.config.value = obj.config.min;
   obj.originalValue = kvLookup('value', config, dataset, -1, 'float');
 
+    //adjust custom sectors if not defined to cover full range
+    var sector_low = obj.config.max + 100;
+    var sector_high =  obj.config.min -100;
+    var loindex;
+    var hiindex;
+    //find the lowest and highest values and the sectors they belong to
+    obj.config.customSectors.forEach(function(elem,index,arr){
+        if(elem.lo < sector_low) {
+            sector_low = elem.lo;
+            loindex = index;
+        }
+        if(elem.hi > sector_high){
+            sector_high = elem.hi;
+            hiindex = index;
+        }
+    });
+    //assign the minimum range to the lowest defined custom sector
+    if (sector_low !== obj.config.min){
+        elem = obj.config.customSectors[loindex];
+        elem.lo = obj.config.min;
+    }
+    //assign the max range to the highest defined custom sector
+    if (sector_high !== obj.config.max){
+        elem = obj.config.customSectors[hiindex];
+        elem.hi = obj.config.max;
+    }
+
   // create canvas
   if (obj.config.id !== null && (document.getElementById(obj.config.id)) !== null) {
     obj.canvas = Raphael(obj.config.id, "100%", "100%");
