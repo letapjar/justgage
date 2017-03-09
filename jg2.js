@@ -756,7 +756,7 @@ JustGage = function(config) {
     "font-weight": "bold",
     "font-family": obj.config.valueFontFamily,
     "fill": obj.config.valueFontColor,
-    "fill-opacity": "0"
+    "fill-opacity": "1"
   });
   setDy(obj.txtValue, obj.params.valueFontSize, obj.params.valueY);
 
