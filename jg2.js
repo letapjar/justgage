@@ -720,7 +720,7 @@ JustGage = function(config) {
       "stroke-linecap": (obj.config.pointerOptions.stroke_linecap !== null && obj.config.pointerOptions.stroke_linecap !== undefined) ? obj.config.pointerOptions.stroke_linecap : "square",
       "fill": (obj.config.pointerOptions.color !== null && obj.config.pointerOptions.color !== undefined) ? obj.config.pointerOptions.color : "#000000",
       ndl: [
-        obj.config.min,
+        obj.config.value,
         obj.config.min,
         obj.config.max,
         obj.params.widgetW,
@@ -750,7 +750,7 @@ JustGage = function(config) {
   setDy(obj.txtTitle, obj.params.titleFontSize, obj.params.titleY);
 
   // value
-  obj.txtValue = obj.canvas.text(obj.params.valueX, obj.params.valueY, 0);
+  obj.txtValue = obj.canvas.text(obj.params.valueX, obj.params.valueY, obj.config.value);
   obj.txtValue.attr({
     "font-size": obj.params.valueFontSize,
     "font-weight": "bold",
